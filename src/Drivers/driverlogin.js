@@ -7,17 +7,14 @@ import generateToken from "../helpers/funciones.js";
 const DriverLogin = {
   loginUser: async (request, response) => {
     try {
-      console.log("veificando datos");
       const { nombreUsuario, contrasenia } = request.body;
       const UserFound = await Usuario.findOne({ nombreUsuario });
       if (UserFound) {
-        console.log("encontro usuario");
         const contrseniaValida = await bcrypt.compare(
           contrasenia,
           UserFound.contrasenia
         );
         if (contrseniaValida) {
-          console.log("creo un token");
           const token = await generateToken({
             id: UserFound._id,
             nombre: UserFound.nombre,
