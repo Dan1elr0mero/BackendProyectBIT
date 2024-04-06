@@ -12,7 +12,7 @@ servidor.use(
   express.json()
 ); /* se esportamos los metodos de json para que puede leerlos ya que vienen de postman */
 servidor.use(
-  "/usuarios",
+  "/usuarios/",
   router
 ); /*para la ruta usuarios usa un enrutador aparte*/
 servidor.use("/login/", routerLogin);

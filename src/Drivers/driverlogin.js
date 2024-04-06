@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
 import Usuario from "../modelos/modelos.js";
-import generateToken from "../helpers/funciones.js";
+import { generarToken, verificarToken } from "../helpers/funciones.js";
 
 const DriverLogin = {
   loginUser: async (request, response) => {
@@ -41,5 +41,25 @@ const DriverLogin = {
       response.json({ result: "good", message: "error", data: error });
     }
   },
+  validarToken: async (request, response) => {
+    try {
+      const token = solicitud.params.token;
+      const decodificado = await verificarToken(token);
+      if (decodificado.id) {
+        respuesta.json({
+          resultado: "bien",
+          mensaje: "válido",
+          datos: decodificado,
+        });
+      }
+    } catch (error) {
+      respuesta.json({
+        resultado: "mal",
+        mensaje: "ocurrió un error",
+        datos: error,
+      });
+    }
+  },
 };
+
 export default DriverLogin;
