@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import router from "./rutas/rutasUsuarios.js";
+import cors from "cors";
 
 import routerLogin from "./rutas/lorinrouter.js";
 // se importa los metodos de otrod achibos
@@ -11,6 +12,7 @@ const port =
 servidor.use(
   express.json()
 ); /* se esportamos los metodos de json para que puede leerlos ya que vienen de postman */
+servidor.use(cors());
 servidor.use(
   "/usuarios/",
   router
